@@ -1,3 +1,3 @@
-FROM alpine:latest
+FROM nginx:alpine
 
-CMD ["echo", "docker is ON"]
+COPY index.html /usr/share/nginx/html/index.html
