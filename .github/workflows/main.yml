@@ -1,4 +1,4 @@
-name: My First CI Pipeline
+name: Docker CI Pipeline
 
 on:
   push:
@@ -6,11 +6,14 @@ on:
       - main
 
 jobs:
-  test-code:
+  build-docker-image:
     runs-on: ubuntu-latest
     steps:
-      - name: Скачивание кода из репозитория
+      - name: Скачивание кода
         uses: actions/checkout@v4
 
-      - name: Запуск нашего скрипта
-        run: ./script.sh
+      - name: Сборка Docker-образа
+        run: docker build -t my-cicd-app:latest .
+
+      - name: Проверка наличия образа
+        run: docker image ls | grep my-cicd-app
